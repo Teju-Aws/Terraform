@@ -6,9 +6,9 @@ resource "aws_instance" "name" {
     }
   
 }
-#resource "aws-vpc" "name" {
-   # CIDR block "10.0.0.0/16"{
-       #vpc-name = "Tej-vpc"
-    #}
-  
-#}
+resource "aws_vpc" "name" {
+    cidr_block = "10.0.0.0/16" 
+       tags = {
+         Name = "Tej-vpc"    
+       }
+}
