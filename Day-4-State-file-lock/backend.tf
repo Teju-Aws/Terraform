@@ -3,7 +3,11 @@ terraform {
     bucket         = "terraform-bucket-111111111"   # S3 bucket name
     key            = "Day-4/terraform.tfstate"       # Path to store state file
     region         = "ap-south-1"                  # AWS region
-            # Optional for locking
-    encrypt        = true                          # Encrypt state at rest
+    #use_lockfile   = true           
+    dynamodb_table = "Lock-Table"
+
   }
+
+
+
 }
