@@ -1,7 +1,7 @@
 resource "aws_vpc" "name" {
   cidr_block = "10.0.0.0/16"
   tags ={
-    Name ="Tej-vpc"
+    Name ="tej-vpc"
   }
 }
 resource "aws_subnet" "name" {
@@ -10,9 +10,9 @@ resource "aws_subnet" "name" {
 }
 resource "aws_subnet" "public" {
     vpc_id = aws_vpc.name.id
-    
+  
     cidr_block = "10.0.1.0/24"
-    availability_zone       = "ap-south-1a"
+    availability_zone       = "us-east-1a"
     tags ={
         Name ="Pub-sub-tej"
     }
@@ -31,16 +31,16 @@ resource "aws_nat_gateway" "name" {
   subnet_id     = aws_subnet.public.id
 
   tags = {
-    Name = "Tej-NAT-Gateway"
+    Name = "tej-NAT-Gateway"
   }
 }
 resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.name.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "ap-south-1a"
+  availability_zone = "us-east-1b"
 
   tags = {
-    Name = "Tej-Private-Subnet"
+    Name = "tej-Private-Subnet"
   }
 }
 resource "aws_route_table" "private" {
@@ -52,7 +52,7 @@ resource "aws_route_table" "private" {
   }
 
   tags = {
-    Name = "Tej-Private-RT"
+    Name = "tej-Private-RT"
   }
 }
 resource "aws_route_table_association" "private_assoc" {
@@ -62,7 +62,7 @@ resource "aws_route_table_association" "private_assoc" {
 
 resource "aws_internet_gateway" "name" {
   tags={
-    Name = "Teju-igw"
+    Name = "teju-igw"
   }
 vpc_id = aws_vpc.name.id
 }
@@ -81,7 +81,7 @@ resource "aws_route_table_association" "name" {
 }
 resource "aws_security_group" "name" {
   tags ={
-    Name ="Tej-sg"
+    Name ="tej-sg"
   }
   description = "allow"
   vpc_id = aws_vpc.name.id
@@ -100,6 +100,6 @@ resource "aws_instance" "name" {
       subnet_id = aws_subnet.name.id
       vpc_security_group_ids =[aws_security_group.name.id]
       tags ={
-        Name = "Tej-Instance"
+        Name = "tej-Instance"
       }
 }
